@@ -1,0 +1,11 @@
+DROP DATABASE IF EXISTS bookstore;
+CREATE DATABASE bookstore;
+
+\c bookestore;
+
+CREATE TABLE books (
+	bid SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+	author VARCHAR(255) NOT NULL,
+	genre VARCHAR(255) NOT NULL
+);

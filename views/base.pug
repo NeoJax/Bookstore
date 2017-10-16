@@ -1,0 +1,19 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='UTF-8')
+		link(rel='icon', href='/images/favicon.ico')
+		link(rel='stylesheet', href='/css/style.css')
+		script(src="https://code.jquery.com/jquery-3.2.1.min.js",
+			“integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=",
+			”crossorigin="anonymous")
+		title BookStore - #{title}
+		block scripts
+	body
+		block header
+			nav.navbar
+				div.logotype Book Store
+				div.user
+					a.login(href='/index') LOGIN
+					a.sign_up(href='/index') SIGN UP
+		block content
