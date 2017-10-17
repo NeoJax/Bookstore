@@ -10,3 +10,5 @@ CREATE TABLE books (
 	height INTEGER NOT NULL,
 	publisher VARCHAR(255) NOT NULL
 );
+
+\COPY products FROM './grocery.csv' DELIMITER ',' CSV HEADER;;

@@ -1,0 +1,10 @@
+extends base.pug
+
+block content
+  div.bookRow
+    span.text #{books.type} #{books.text} 
+  div.user
+    a.details(href='/details') DETAILS
+    br
+    a.index(href='/') INDEX
+    
