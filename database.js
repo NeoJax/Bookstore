@@ -14,7 +14,7 @@ function createBook(title, author, genre, height, publisher) {
 }
 
 function grabBook(type, text) {
-  return db.any(`SELECT * FROM books WHERE "$1"='Penguin'`, [type, text])
+  return db.any(`SELECT * FROM books WHERE ${type}='${text}'`)
     .catch((err) => {
       console.log(err);
     });

@@ -2,7 +2,7 @@ extends base.pug
 
 block content
   h1 Sign-Up
-  h3 Search Types are literally [title, author, genre]
+  h3 Search Types are literally [title, author, genre, publisher, book height]
   form.search_bar(action='/results', method='POST')
     input.type(type='text', name='type', required placeholder='Search Type')
     input.text(type='text', name='text', required placeholder='Search Text')
