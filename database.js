@@ -21,7 +21,7 @@ function grabBook(type, text) {
 }
 
 function grabDetails(title) {
-  return db.any('SELECT * FROM books WHERE title=$1', [title])
+  return db.one(`SELECT * FROM books WHERE title='${title}'`, [title])
     .catch((err) => {
       console.log(err);
     });

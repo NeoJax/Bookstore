@@ -3,6 +3,10 @@ const {
   grabDetails,
 } = require('../database');
 
+router.get('/admin', (req, res) => {
+  res.render('index', { title: 'index' });
+});
+
 router.post('/', (req, res) => {
   grabDetails(req.body.text).then((data) => {
     console.log(data);

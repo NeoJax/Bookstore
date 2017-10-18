@@ -2,11 +2,19 @@ extends base.pug
 
 block content
   h1 Sign-Up
-  h3 Search Types are literally [title, author, genre, publisher, book height]
+  span Search Bar
   form.search_bar(action='/results', method='POST')
-    input.type(type='text', name='type', required placeholder='Search Type')
+    select.type(name='type')
+      option.title(value='title') Title
+      option.author(value='author') Author
+      option.genre(value='genre') Genre
+      option.publisher(value='publisher') Publisher
+      option.height(value='height') Book Height
+    input.text(type='text', name='text', required placeholder='Search Text')
+    input.submit(type='submit', value='submit') 
+  br 
+  span Detailed Search Bar(Searches by Title)
+  form.detail_bar(action='/details', method='POST')
     input.text(type='text', name='text', required placeholder='Search Text')
     input.submit(type='submit', value='submit')
   div.user
-    br
-    a.details(href='/details') DETAILS

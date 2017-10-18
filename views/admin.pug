@@ -1,0 +1,12 @@
+extends base.pug
+
+block content
+  h1 Sign-Up
+  span Search Bar
+  form.search_bar(action='/results', method='POST')
+    input.text(type='text', name='text', required placeholder='Search Text')
+    input.text(type='text', name='text', required placeholder='Search Text')
+    input.text(type='text', name='text', required placeholder='Search Text')
+    input.text(type='text', name='text', required placeholder='Search Text')
+    input.text(type='text', name='text', required placeholder='Search Text')
+    input.submit(type='submit', value='submit') 
