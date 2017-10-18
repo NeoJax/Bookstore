@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pug = require('pug');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,6 +11,7 @@ const results = require('./routes/results.js');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.PORT || 3000);
 
 app.use('/', index);

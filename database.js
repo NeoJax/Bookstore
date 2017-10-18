@@ -1,6 +1,6 @@
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')();
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/grocerystore';
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres@localhost:5432/bookstore';
 const db = pgp(connectionString);
 
 function createBook(title, author, genre, height, publisher) {
@@ -13,29 +13,15 @@ function createBook(title, author, genre, height, publisher) {
     });
 }
 
-function grabAuthor(author) {
-  return db.any('SELECT * FROM products WHERE author=$1', [author])
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-function grabTitle(title) {
-  return db.any('SELECT * FROM products WHERE title=$1', [title])
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-function grabGenre(genre) {
-  return db.any('SELECT * FROM products WHERE genre=$1', [genre])
+function grabBook(type, text) {
+  return db.any(`SELECT * FROM books WHERE "$1"='Penguin'`, [type, text])
     .catch((err) => {
       console.log(err);
     });
 }
 
 function grabDetails(title) {
-  return db.any('SELECT * FROM products WHERE title=$1', [title])
+  return db.any('SELECT * FROM books WHERE title=$1', [title])
     .catch((err) => {
       console.log(err);
     });
@@ -57,9 +43,7 @@ function deleteBook(title) {
 
 module.exports = {
   createBook,
-  grabAuthor,
-  grabTitle,
-  grabGenre,
+  grabBook,
   grabDetails,
   updateBook,
   deleteBook,
