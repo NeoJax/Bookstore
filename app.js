@@ -20,4 +20,4 @@ app.use('/details', details);
 app.use('/results', results);
 app.use('/admin', admin);
 
-const server = app.listen(app.get('port'), () => console.log(`listening to port ' ${app.get('port')}`));
+app.listen(app.get('port'), () => console.log(`listening to port ' ${app.get('port')}`));

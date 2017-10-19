@@ -1,17 +1,15 @@
 const router = require('express').Router();
 const {
-  grabDetails,
+  createBook,
 } = require('../database');
 
-router.get('/admin', (req, res) => {
-  res.render('index', { title: 'index' });
+router.get('/', (req, res) => {
+  res.render('admin', { title: 'admin' });
 });
 
 router.post('/', (req, res) => {
-  grabDetails(req.body.text).then((data) => {
-    console.log(data);
-    res.render('details', { title: 'details', book: data });
-  });
+  createBook(req.body.title, req.body.author, req.body.genre, req.body.height, req.body.publisher);
+  res.render('admin', { title: 'admin' });
 });
 
 module.exports = router;

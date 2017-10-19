@@ -3,11 +3,17 @@ const pgp = require('pg-promise')();
 const connectionString = process.env.DATABASE_URL || 'postgresql://postgres@localhost:5432/bookstore';
 const db = pgp(connectionString);
 
+function grabAll(limit, offset) {
+  return db.query(`SELECT * FROM books LIMIT ${limit} OFFSET ${offset}`)
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 function createBook(title, author, genre, height, publisher) {
-  return db.any(
-    'INSERT INTO bookstore (title, author, genre, height, publisher) VALUES ($1, $2, $3, $4, $5)',
-    [title, author, genre, height, publisher],
-  )
+  return db.none(`INSERT INTO books
+    (title, author, genre, height, publisher) VALUES
+    ('${title}', '${author}', '${genre}', '${height}', '${publisher}')`)
     .catch((err) => {
       console.log(err);
     });
@@ -27,15 +33,15 @@ function grabDetails(title) {
     });
 }
 
-function updateBook(title, genre) {
-  return db.any('UPDATE bookstore SET title=$1 WHERE genre=$2', [title, genre])
+function updateBook(oldTitle, newTitle, newAuthor, newGenre) {
+  return db.none(`UPDATE books SET title='${newTitle}', author='${newAuthor}', genre='${newGenre}' WHERE title='${oldTitle}'`)
     .catch((err) => {
       console.log(err);
     });
 }
 
 function deleteBook(title) {
-  return db.any('DELETE FROM bookstore WHERE title=$1', [title])
+  return db.none(`DELETE FROM books WHERE title='${title}'`)
     .catch((err) => {
       console.log(err);
     });
@@ -47,4 +53,5 @@ module.exports = {
   grabDetails,
   updateBook,
   deleteBook,
+  grabAll,
 };

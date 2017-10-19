@@ -17,4 +17,10 @@ block content
   form.detail_bar(action='/details', method='POST')
     input.text(type='text', name='text', required placeholder='Search Text')
     input.submit(type='submit', value='submit')
+  br
+  div.books
+    each book in books
+      div.bookrow
+        span.text #{book.title}
   div.user
+    
