@@ -4,7 +4,7 @@
   "description": "Making an online bookstore",
   "main": "app.js",
   "scripts": {
-    "test": "mocha ./database_test.js",
+    "test": "mocha ./tests/tests.js",
     "start": "nodemon ./app.js"
   },
   "repository": "https://github.com/NeoJax/Bookstore",
