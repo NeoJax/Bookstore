@@ -2,15 +2,20 @@ doctype html
 html(lang='en')
 	head
 		meta(charset='UTF-8')
-		link(rel='stylesheet', href='/css/style.css')
-		script(src="https://code.jquery.com/jquery-3.2.1.min.js",
-			“integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=",
-			”crossorigin="anonymous")
+		script(src="https://code.jquery.com/jquery-3.2.1.js")
+		link(rel='stylesheet',href='/style.css')
+		link(rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css")
+		script(src="semantic/dist/semantic.min.js")
 		title BookStore - #{title}
 		block scripts
 	body
-		block header
-			nav.navbar
-				div.logotype 
-					h1 Book Store
+		block header		
+		div(class="ui pointing menu")
+			a(class="item" href="/") Search Page
+			a(class="item" href="/login") Log In Page
+			a(class="item" href="/signup") Sign Up Page
+			a(class="item" href="/user") User Page
+			a(class="item" href="/admin") Admin Page
+			button(class="ui button") Testing
+		h1 Book Store
 		block content

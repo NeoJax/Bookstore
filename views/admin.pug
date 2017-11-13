@@ -1,7 +1,7 @@
 extends base.pug
 
 block content
-  h1 Admin Add Book
+  h1 Admin Page
   form.search_bar(action='/admin', method='POST')
     input.title(type='title', name='title', required placeholder='Insert Book Title')
     input.author(type='author', name='author', required placeholder='Insert Book Author')
