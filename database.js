@@ -1,9 +1,17 @@
+/*
+*
+*
+* NOTE: UPDATE WHERE THIS GOES MEANING PUT IN DB AND FIX PROBLEMS THAT COME WITH IT
+*
+*
+*/
+
 const pgp = require('pg-promise')();
 
 const connectionString = process.env.DATABASE_URL || 'postgresql://postgres@localhost:5432/bookstore';
 const db = pgp(connectionString);
 
-function grabAll(limit, offset) {
+function grabAllBooks(limit, offset) {
   return db.query(`SELECT * FROM books LIMIT ${limit} OFFSET ${offset}`)
     .catch((err) => {
       console.log(err);
@@ -47,11 +55,33 @@ function deleteBook(title) {
     });
 }
 
+function grabAllUsers() {
+  return db.all('SELECT * FROM users')
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function grabUser(username) {
+  return db.one(`SELECT * FROM users WHERE username='${username}'`)
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function createUser(username, password) {
+  return db.none(`INSERT INTO users (username, password, access) VALUES
+  ('${username}','${password}','user')`);
+}
+
 module.exports = {
   createBook,
   grabBook,
   grabDetails,
   updateBook,
   deleteBook,
-  grabAll,
+  grabAllBooks,
+  grabAllUsers,
+  grabUser,
+  createUser,
 };

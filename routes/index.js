@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {
   updateBook,
   deleteBook,
-  grabAll,
+  grabAllBooks,
 } = require('../database');
 
 router.get('/', (req, res) => {
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   }
   const limit = 10;
   const offset = limit * (page - 1);
-  grabAll(limit, offset).then((data) => {
+  grabAllBooks(limit, offset).then((data) => {
     console.log(data);
     res.render('index', { title: 'index', books: data });
   });

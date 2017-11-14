@@ -15,7 +15,7 @@ const results = require('./routes/results.js');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/')));
 app.set('port', process.env.PORT || 3000);
 
 app.use('/', index);
