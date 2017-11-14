@@ -7,7 +7,8 @@ block content
       a(class="item" href="/login") Log In Page
       a(class="item" href="/signup") Sign Up Page
       a(class="item" href="/user") User Page
-      a(class="item" href="/admin") Admin Page
+      if access === 'admin' || access = 'superadmin'
+        a(class="item admin" href="/admin") Admin Page
   h1 Search Page
   span Search Bar
   form.search_bar(action='/results', method='POST')

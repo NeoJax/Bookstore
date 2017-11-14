@@ -7,9 +7,17 @@ block content
       a(class="active item" href="/login") Log In Page
       a(class="item" href="/signup") Sign Up Page
       a(class="item" href="/user") User Page
-      a(class="item" href="/admin") Admin Page
+      if access === 'admin' || access = 'superadmin'
+        a(class="item admin" href="/admin") Admin Page
   h1 Log In Page
   form.login_bar(action='/login', method="POST")
     input.text(type='text', name='username', required placeholder='User Name')
     input.text(type='text', name='password', required placeholder='Password')
     input.submit(type='submit', value='Log In')
+  div.check
+    span.text #{check}
+  div.user
+    span.text #{user}
+  div.access
+    span.text #{access}
+    

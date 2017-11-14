@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const jquery = require('jquery')
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,6 +20,16 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(express.static(path.join(__dirname, '/')));
 app.set('port', process.env.PORT || 3000);
+app.use(cookieParser());
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'Lolwut',
+  cookie: {
+    maxAge: 60000,
+    httpOnly: false,
+  },
+}));
 
 app.use('/', index);
 app.use('/login', login);

@@ -56,7 +56,7 @@ function deleteBook(title) {
 }
 
 function grabAllUsers() {
-  return db.all('SELECT * FROM users')
+  return db.any('SELECT * FROM users')
     .catch((err) => {
       console.log(err);
     });

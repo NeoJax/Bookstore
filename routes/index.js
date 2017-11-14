@@ -13,8 +13,13 @@ router.get('/', (req, res) => {
   const limit = 10;
   const offset = limit * (page - 1);
   grabAllBooks(limit, offset).then((data) => {
-    console.log(data);
-    res.render('index', { title: 'index', books: data });
+    res.render('index', {
+      title: 'index',
+      books: data,
+      check: req.session.check,
+      user: req.session.username,
+      access: req.session.access,
+    });
   });
 });
 
