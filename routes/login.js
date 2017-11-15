@@ -1,3 +1,9 @@
+/*
+*
+* Start working on redirecting and forcing users to log in first. Also make log out.
+*
+*/
+
 const router = require('express').Router();
 const {
   checkUser,
@@ -18,9 +24,14 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   checkUser(req.body.username, req.body.password).then((data) => {
+    let check = '';
     if (data === false) {
-      req.session.check = false;
+      req.session.username = 'guest';
       req.session.access = 'visitor';
+      req.session.check = false;
+    } else if (data === 'Wrong Information') {
+      res.status(400);
+      check = 'There was an error with your username/password. Please try again';
     } else {
       req.session.username = data.username;
       req.session.access = data.access;
@@ -31,6 +42,7 @@ router.post('/', (req, res) => {
       check: req.session.check,
       user: req.session.username,
       access: req.session.access,
+      error: check,
     });
   });
 });

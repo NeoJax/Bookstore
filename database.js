@@ -65,6 +65,9 @@ function grabAllUsers() {
 function grabUser(username) {
   return db.one(`SELECT * FROM users WHERE username='${username}'`)
     .catch((err) => {
+      if (err.message === 'No data returned from the query.') {
+        return false;
+      }
       console.log(err);
     });
 }
