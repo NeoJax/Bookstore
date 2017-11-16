@@ -3,25 +3,26 @@ extends base.pug
 block content
   header
     div(class="ui menu")
-      a(class="item" href="/") Search Page
-      a(class="active item" href="/login") Log In Page
-      a(class="item" href="/signup") Sign Up Page
-      a(class="item" href="/user") User Page
+      if access !== 'visitor'
+        a(class="item" href="/") Search Pages
+      if access === 'visitor'
+        a(class="active item" href="/login") Log In Page
+      if access === 'visitor'
+        a(class="item" href="/signup") Sign Up Page
+      if access !== 'visitor'
+        a(class="item" href="/user") User Page
       if access === 'superadmin'
         a(class="item admin" href="/admin") Admin Page
       else if access === 'admin'
         a(class="item admin" href="/admin") Admin Page
-  h1 Log In Page
-  form.login_bar(action='/login', method="POST")
+      if access !== 'visitor'
+        form.logout(action='/logout', method='POST')
+          input(type='submit', class="item" value="Log Out")
+  h1(class="title") Log In Page
+  form.login_bar(action='/login', method="POST" class="ui centered grid")
     input.text(type='text', name='username', required placeholder='User Name')
     input.text(type='text', name='password', required placeholder='Password')
     input.submit(type='submit', value='Log In')
-  div.check
-    span.text #{check}
-  div.user
-    span.text #{user}
-  div.access
-    span.text #{access}
-  div.error
+  div(class="ui centered grid").error
     span.text #{error}
     

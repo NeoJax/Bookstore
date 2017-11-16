@@ -3,34 +3,52 @@ extends base.pug
 block content
   header
     div(class="ui menu")
-      a(class="active item" href="/") Search Page
-      a(class="item" href="/login") Log In Page
-      a(class="item" href="/signup") Sign Up Page
-      a(class="item" href="/user") User Page
+      if access !== 'visitor'
+        a(class="active item" href="/") Search Pages
+      if access === 'visitor'
+        a(class="item" href="/login") Log In Page
+      if access === 'visitor'
+        a(class="item" href="/signup") Sign Up Page
+      if access !== 'visitor'
+        a(class="item" href="/user") User Page
       if access === 'superadmin'
         a(class="item admin" href="/admin") Admin Page
       else if access === 'admin'
         a(class="item admin" href="/admin") Admin Page
-  h1 Search Page
-  span Search Bar
-  form.search_bar(action='/results', method='POST')
-    select.type(name='type')
-      option.title(value='title') Title
-      option.author(value='author') Author
-      option.genre(value='genre') Genre
-      option.publisher(value='publisher') Publisher
-      option.height(value='height') Book Height
-    input.text(type='text', name='text', required placeholder='Search Text')
-    input.submit(type='submit', value='submit') 
-  br 
-  span Detailed Search Bar(Searches by Title)
-  form.detail_bar(action='/details', method='POST')
-    input.text(type='text', name='text', required placeholder='Search Text')
-    input.submit(type='submit', value='submit')
-  br
-  div.books
-    each book in books
-      div.bookrow
-        span.text #{book.title}
-  div.user
+      if access !== 'visitor'
+        form.logout(action='/logout', method='POST')
+          input(type='submit', class="item" value="Log Out")
+  h1(class="title") Search Page
+  div(class="ui centered grid")
+    span Search Bar
+    form.search_bar(action='/results', method='POST' class="row")
+      select.type(name='type')
+        option.title(value='title') Title
+        option.author(value='author') Author
+        option.genre(value='genre') Genre
+        option.publisher(value='publisher') Publisher
+        option.height(value='height') Book Height
+      input.text(type='text', name='text', required placeholder='Search Text')
+      input.submit(type='submit', value='submit') 
+    br 
+    span Detailed Search Bar(Searches by Title)
+    form.detail_bar(action='/details', method='POST' class="row")
+      input.text(type='text', name='text', required placeholder='Search Text')
+      input.submit(type='submit', value='submit')
+    br
+    
+    div.books
+      form(action='/', method="GET")
+        input(type="hidden" name='page' value=page+1)
+        input(type="submit" value='Next Page')
+      if page !== 1
+        form(action='/', method="GET")
+          input(type="hidden" name='page' value=page-1)
+          input(type="submit" value='Previous Page')
+      each book in books
+        form(action='/details', method="POST").bookrow
+          input(type="hidden" name='text' value=book.title)
+          input(type="submit" value=book.title).text
+
+    
     

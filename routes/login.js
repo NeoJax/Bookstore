@@ -29,21 +29,29 @@ router.post('/', (req, res) => {
       req.session.username = 'guest';
       req.session.access = 'visitor';
       req.session.check = false;
+      res.render('login', {
+        title: 'login',
+        check: req.session.check,
+        user: req.session.username,
+        access: req.session.access,
+        error: check,
+      });
     } else if (data === 'Wrong Information') {
       res.status(400);
       check = 'There was an error with your username/password. Please try again';
+      res.render('login', {
+        title: 'login',
+        check: req.session.check,
+        user: req.session.username,
+        access: req.session.access,
+        error: check,
+      });
     } else {
       req.session.username = data.username;
       req.session.access = data.access;
       req.session.check = data.check;
+      res.redirect('/');
     }
-    res.render('login', {
-      title: 'login',
-      check: req.session.check,
-      user: req.session.username,
-      access: req.session.access,
-      error: check,
-    });
   });
 });
 

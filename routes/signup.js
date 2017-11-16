@@ -2,6 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const {
   createUser,
+  grabUser,
 } = require('../database');
 
 router.get('/', (req, res) => {
@@ -15,9 +16,24 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => {
-    createUser(req.body.username, hash);
+    grabUser(req.body.username).then((data) => {
+      if (!data.username) {
+        createUser(req.body.username, hash);
+        res.redirect('/', {
+          title: 'index',
+          check: req.session.check,
+          user: req.session.username,
+          access: req.session.access,
+        });
+      }
+      res.render('signup', {
+        title: 'signup',
+        check: req.session.check,
+        user: req.session.username,
+        access: req.session.access,
+      });
+    });
   });
-  res.render('signup', { title: 'signup' });
 });
 
 module.exports = router;
