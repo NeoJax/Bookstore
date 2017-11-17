@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const jquery = require('jquery')
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +25,7 @@ app.use(session({
   saveUninitialized: true,
   secret: 'Lolwut',
   cookie: {
-    maxAge: 60000,
+    maxAge: 6000000,
     httpOnly: false,
   },
 }));

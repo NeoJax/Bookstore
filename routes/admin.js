@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const {
   createBook,
-} = require('../database');
+} = require('../db/database');
 
 router.get('/', (req, res) => {
-  console.log(req.session.access);
   res.render('admin', {
     title: 'admin',
     check: req.session.check,

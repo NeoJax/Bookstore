@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const {
   grabUser,
-} = require('../database');
+} = require('../db/database');
 
 function checkUser(username, pass) {
   return grabUser(username).then((data) => {

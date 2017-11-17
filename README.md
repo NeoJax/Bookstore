@@ -6,6 +6,8 @@ My work on the bookstore full-stack app
 
 First, run `npm install` to get it set up
 
+NOTE: belows kills the database named bookstore
+
 Then, get your postgresql server running and type in `psql -f ./db/schema.sql` to make and fill the database and tables
 
 Then, run npm start to get the server started

@@ -1,23 +1,6 @@
 extends base.pug
 
 block content
-  header
-    div(class="ui menu")
-      if access !== 'visitor'
-        a(class="item" href="/") Search Pages
-      if access === 'visitor'
-        a(class="item" href="/login") Log In Page
-      if access === 'visitor'
-        a(class="item" href="/signup") Sign Up Page
-      if access !== 'visitor'
-        a(class="item" href="/user") User Page
-      if access === 'superadmin'
-        a(class="item admin active" href="/admin") Admin Page
-      else if access === 'admin'
-        a(class="item admin active" href="/admin") Admin Page
-      if access !== 'visitor'
-        form.logout(action='/logout', method='POST' class="right menu")
-          input(type='submit', class="item" value="Log Out")
   h1(class="title") Admin Page
   div(class="ui centered grid")
     form.search_bar(action='/admin', method='POST' class="row")

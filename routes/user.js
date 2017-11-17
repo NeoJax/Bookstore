@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {
   grabAllUsers,
-} = require('../database');
+} = require('../db/database');
 
 router.get('/', (req, res) => {
   grabAllUsers().then((data) => {

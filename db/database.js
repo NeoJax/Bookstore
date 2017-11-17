@@ -1,11 +1,3 @@
-/*
-*
-*
-* NOTE: UPDATE WHERE THIS GOES MEANING PUT IN DB AND FIX PROBLEMS THAT COME WITH IT
-*
-*
-*/
-
 const pgp = require('pg-promise')();
 
 const connectionString = process.env.DATABASE_URL || 'postgresql://postgres@localhost:5432/bookstore';
@@ -30,6 +22,9 @@ function createBook(title, author, genre, height, publisher) {
 function grabBook(type, text) {
   return db.any(`SELECT * FROM books WHERE ${type}='${text}'`)
     .catch((err) => {
+      if (err.message === 'No data returned from the query.') {
+        return false;
+      }
       console.log(err);
     });
 }
@@ -37,6 +32,9 @@ function grabBook(type, text) {
 function grabDetails(title) {
   return db.one(`SELECT * FROM books WHERE title='${title}'`, [title])
     .catch((err) => {
+      if (err.message === 'No data returned from the query.') {
+        return false;
+      }
       console.log(err);
     });
 }
@@ -77,6 +75,11 @@ function createUser(username, password) {
   ('${username}','${password}','user')`);
 }
 
+function createHistory(username, searchType, searchTerm) {
+  return db.none(`INSERT INTO history (username, searchType, searchTerm) VALUES
+  ('${username}','${searchType}','${searchTerm}')`);
+}
+
 module.exports = {
   createBook,
   grabBook,
@@ -87,4 +90,5 @@ module.exports = {
   grabAllUsers,
   grabUser,
   createUser,
+  createHistory,
 };

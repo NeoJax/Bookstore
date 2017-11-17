@@ -1,9 +1,11 @@
+/* NOTE LOOK AT THE FUCKING NOT FOUND SHIT IM TIRED AND DONT WANT TO DO IT also sorry for caps */
+
 const router = require('express').Router();
 const {
   updateBook,
   deleteBook,
   grabAllBooks,
-} = require('../database');
+} = require('../db/database');
 
 router.get('/', (req, res) => {
   let { page } = req.query;
@@ -17,24 +19,33 @@ router.get('/', (req, res) => {
     res.render('index', {
       title: 'index',
       books: data,
+      bookSize: data.length,
       check: req.session.check,
       user: req.session.username,
       access: req.session.access,
       page,
-      nextPage: page + 1,
-      previousPage: page - 1,
     });
   });
 });
 
 router.post('/change', (req, res) => {
   updateBook(req.body.oldtitle, req.body.newtitle, req.body.newauthor, req.body.newgenre);
-  res.render('admin', { title: 'admin' });
+  res.render('admin', {
+    title: 'admin',
+    check: req.session.check,
+    user: req.session.username,
+    access: req.session.access,
+  });
 });
 
 router.post('/delete', (req, res) => {
   deleteBook(req.body.title);
-  res.render('admin', { title: 'admin' });
+  res.render('admin', {
+    title: 'admin',
+    check: req.session.check,
+    user: req.session.username,
+    access: req.session.access,
+  });
 });
 
 router.post('/logout', (req, res) => {
@@ -42,6 +53,21 @@ router.post('/logout', (req, res) => {
   req.session.access = 'visitor';
   req.session.check = false;
   res.redirect('/login');
+});
+
+router.post('/lookup', (req, res) => {
+  console.log(req.body);
+  const newObject = JSON.parse(req.body.text);
+  console.log(newObject.username);
+  res.render('lookup', {
+    title: 'lookup',
+    lookUser: newObject.username,
+    lookPass: newObject.password,
+    lookAccess: newObject.access,
+    check: req.session.check,
+    user: req.session.username,
+    access: req.session.access,
+  });
 });
 
 module.exports = router;

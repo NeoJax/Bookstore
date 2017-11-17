@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const {
   createUser,
   grabUser,
-} = require('../database');
+} = require('../db/database');
 
 router.get('/', (req, res) => {
   res.render('signup', {
