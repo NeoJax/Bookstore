@@ -1,11 +1,14 @@
 extends base.pug
 
 block content
-  h1(class="title") Log In Page
-  form.login_bar(action='/login', method="POST" class="ui centered grid")
-    input.text(type='text', name='username', required placeholder='User Name')
-    input.text(type='text', name='password', required placeholder='Password')
-    input.submit(type='submit', value='Log In')
-  div(class="ui centered grid").error
-    span.text #{error}
+  div(class="ui middle aligned center aligned grid")
+    span.row
+    h1(class="title row") Login Page
+    form.login_bar(action='/login', method="POST" class="row ui large form")
+      div(class="ui stacked segment")
+        input.text(type='text', name='username', required placeholder='User Name' class="ui input")
+        input.text(type='text', name='password', required placeholder='Password' class="ui input")
+        input.submit(type='submit', value='Log In' class="ui fluid button")
+    div(class="ui centered grid row").error
+      span.text #{error}
     

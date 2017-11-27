@@ -16,6 +16,7 @@ function checkUser(username, pass) {
         access: data.access,
         check: true,
       };
+      return user;
     } else if (data !== false) {
       check = 'Wrong Information';
     }
@@ -26,13 +27,11 @@ function checkUser(username, pass) {
           access: data.access,
           check: true,
         };
+        return user;
       } else if (data !== false) {
         check = 'Wrong Information';
       }
     });
-    if (typeof user === 'object') {
-      return user;
-    }
     return check;
   });
 }

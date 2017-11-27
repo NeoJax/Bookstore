@@ -20,7 +20,7 @@ function createBook(title, author, genre, height, publisher) {
 }
 
 function grabBook(type, text) {
-  return db.any(`SELECT * FROM books WHERE ${type}='${text}'`)
+  return db.any(`SELECT * FROM books WHERE ${type}='${text}'`)// Note Dont Do what i did with
     .catch((err) => {
       if (err.message === 'No data returned from the query.') {
         return false;
@@ -30,7 +30,7 @@ function grabBook(type, text) {
 }
 
 function grabDetails(title) {
-  return db.one(`SELECT * FROM books WHERE title='${title}'`, [title])
+  return db.one('SELECT * FROM books WHERE title=\'$1\'', [title])
     .catch((err) => {
       if (err.message === 'No data returned from the query.') {
         return false;

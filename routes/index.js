@@ -1,5 +1,3 @@
-/* NOTE LOOK AT THE FUCKING NOT FOUND SHIT IM TIRED AND DONT WANT TO DO IT also sorry for caps */
-
 const router = require('express').Router();
 const {
   updateBook,

@@ -15,23 +15,26 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(req.body);
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     grabUser(req.body.username).then((data) => {
+      console.log('other lol');
       if (!data.username) {
         createUser(req.body.username, hash);
-        res.redirect('/', {
-          title: 'index',
+        console.log('that one lol');
+        res.status('300');
+        req.session.username = req.body.username;
+        req.session.access = 'user';
+        req.session.check = true;
+        res.redirect('/');
+      } else {
+        res.render('signup', {
+          title: 'signup',
           check: req.session.check,
           user: req.session.username,
           access: req.session.access,
         });
       }
-      res.render('signup', {
-        title: 'signup',
-        check: req.session.check,
-        user: req.session.username,
-        access: req.session.access,
-      });
     });
   });
 });
