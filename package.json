@@ -2,6 +2,10 @@
   "name": "bookstore",
   "version": "1.0.0",
   "description": "Making an online bookstore",
+  "engines": {
+    "node": "8.4.0",
+    "npm": "5.6.0"
+  },
   "main": "app.js",
   "scripts": {
     "test": "mocha ./tests/tests.js",
@@ -26,9 +30,5 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "mocha": "^4.0.1"
-  },
-  "engines": {
-    "node": "^8.4.0",
-    "npm": "^5.6.0"
   }
 }
