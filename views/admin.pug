@@ -1,22 +1,23 @@
 extends base.pug
 
 block content
-  h1 Admin Add Book
-  form.search_bar(action='/admin', method='POST')
-    input.title(type='title', name='title', required placeholder='Insert Book Title')
-    input.author(type='author', name='author', required placeholder='Insert Book Author')
-    input.genre(type='genre', name='genre', required placeholder='Insert Book Genre')
-    input.height(type='height', name='height', required placeholder='Insert Book Height')
-    input.publisher(type='publisher', name='publisher', required placeholder='Insert Book Publisher')
-    input.addbook(type='submit', value='submit new book')
-  br
-  form.delete_bar(action='/delete', method='POST')
-    input.title(type='title', name='title', required placeholder='Insert Book Title')
-    input.deletebook(type='submit', value='delete book')
-  br
-  form.update_bar(action='/change', method='POST')
-    input.oldtitle(type='oldtitle', name='oldtitle', required placeholder='Select Book Title')
-    input.newtitle(type='newtitle', name='newtitle', required placeholder='Insert New Book Title')
-    input.newauthor(type='newauthor', name='newauthor', required placeholder='Insert New Author Title')
-    input.newgenre(type='newgenre', name='newgenre', required placeholder='Insert New Genre Title')
-    input.updatebook(type='submit', value='update book')
+  h1(class="title") Admin Page
+  div(class="ui centered grid")
+    form.search_bar(action='/admin', method='POST' class="row")
+      input.title(type='title', name='title', required placeholder='Insert Book Title')
+      input.author(type='author', name='author', required placeholder='Insert Book Author')
+      input.genre(type='genre', name='genre', required placeholder='Insert Book Genre')
+      input.height(type='height', name='height', required placeholder='Insert Book Height')
+      input.publisher(type='publisher', name='publisher', required placeholder='Insert Book Publisher')
+      input.addbook(type='submit', value='submit new book')
+    br
+    form.delete_bar(action='/delete', method='POST' class="row")
+      input.title(type='title', name='title', required placeholder='Insert Book Title')
+      input.deletebook(type='submit', value='delete book')
+    br
+    form.update_bar(action='/change', method='POST' class="row")
+      input.oldtitle(type='oldtitle', name='oldtitle', required placeholder='Select Book Title')
+      input.newtitle(type='newtitle', name='newtitle', required placeholder='Insert New Book Title')
+      input.newauthor(type='newauthor', name='newauthor', required placeholder='Insert New Author Title')
+      input.newgenre(type='newgenre', name='newgenre', required placeholder='Insert New Genre Title')
+      input.updatebook(type='submit', value='update book')

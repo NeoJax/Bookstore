@@ -1,0 +1,12 @@
+extends base.pug
+
+block content
+  h1(class="title") User Page
+  div.users(class="ui centered grid")
+    each user in users
+      div.userrow(class="row")
+        span.text #{user.username}
+        if access === 'superadmin'
+          form(action="/lookup", method="POST")
+            input(type="hidden", name="text" value=user)
+            input(type="submit", value=user.username)

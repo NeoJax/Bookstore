@@ -1,7 +1,8 @@
 extends base.pug
 
 block content
-  div.bookrow
+  br
+  div(class="ui centered grid")
     p 
       strong Title: 
       | #{book.title} 
@@ -17,5 +18,3 @@ block content
     p  
       strong Publisher: 
       | #{book.publisher}
-  div.user
-    a.index(href='/') INDEX

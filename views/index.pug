@@ -1,26 +1,42 @@
 extends base.pug
 
 block content
-  h1 Sign-Up
-  span Search Bar
-  form.search_bar(action='/results', method='POST')
-    select.type(name='type')
-      option.title(value='title') Title
-      option.author(value='author') Author
-      option.genre(value='genre') Genre
-      option.publisher(value='publisher') Publisher
-      option.height(value='height') Book Height
-    input.text(type='text', name='text', required placeholder='Search Text')
-    input.submit(type='submit', value='submit') 
-  br 
-  span Detailed Search Bar(Searches by Title)
-  form.detail_bar(action='/details', method='POST')
-    input.text(type='text', name='text', required placeholder='Search Text')
-    input.submit(type='submit', value='submit')
-  br
-  div.books
-    each book in books
-      div.bookrow
-        span.text #{book.title}
-  div.user
+  h1(class="title") Search Page
+  div(class="ui centered grid")
+    span.row Search Bar
+    div.row
+      form.search_bar(action='/results', method='POST' class="ui action input")
+        select.type(name='type' class="ui compact selection left labeled")
+          option.title(value='title') Title
+          option.author(value='author') Author
+          option.genre(value='genre') Genre
+          option.publisher(value='publisher') Publisher
+          option.height(value='height') Book Height
+        input(type='text', name='text', required placeholder='Search Text' class="left labeled")
+        input(type='submit', value='submit' class="ui blue button") 
+    br 
+    span.row Detailed Search Bar(Searches by Title)
+    div.row
+      form.detail_bar(action='/details', method='POST' class="ui action input")
+        input.text(type='text', name='text', required placeholder='Search Text')
+        input.submit(type='submit', value='submit' class="ui blue button")
+    br
+    
+    div.books(class="ui three column grid container center aligned")
+      if page !== 1
+        div(class="column")
+          form(action='/', method="GET")
+            input(type="hidden" name='page' value=page-1)
+            input(type="submit" value='Previous Page' class="ui button orange")
+      div(class="column")
+        each book in books
+          form(action='/details', method="POST" class="ui centered row")
+            input(type="hidden" name='text' value=book.title)
+            input(type="submit" value=book.title class="ui small button basic")
+      if bookSize > 9
+        div(class="column")
+          form(action='/', method="GET")
+            input(type="hidden" name='page' value=page+1)
+            input(type="submit" value='Next Page' class="ui button blue")
+    
     

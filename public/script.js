@@ -1,0 +1,41 @@
+const bcrypt = require('bcrypt');
+const {
+  grabUser,
+} = require('../db/database');
+
+function checkUser(username, pass) {
+  return grabUser(username).then((data) => {
+    let user;
+    let check = false;
+    if (data === false) {
+      check = 'Wrong Information';
+    }
+    if (data.password === pass) {
+      user = {
+        username: data.username,
+        access: data.access,
+        check: true,
+      };
+      return user;
+    } else if (data !== false) {
+      check = 'Wrong Information';
+    }
+    bcrypt.compare(pass, data.password, (err, res) => {
+      if (res === true) {
+        user = {
+          username: data.username,
+          access: data.access,
+          check: true,
+        };
+        return user;
+      } else if (data !== false) {
+        check = 'Wrong Information';
+      }
+    });
+    return check;
+  });
+}
+
+module.exports = {
+  checkUser,
+};
