@@ -64,7 +64,7 @@ describe('testing the database.js functions', () => {
         });
       });
     });
-    
+
     context('testing if there is an error', () => {
       it('should return an error specifying limit', (done) => {
         grabAll(-5, 0).then((data) => {
